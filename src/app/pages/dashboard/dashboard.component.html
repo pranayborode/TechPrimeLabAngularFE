@@ -1,0 +1,71 @@
+<app-sidenav />
+<div>
+    <div class="col bg-image position-relative">
+        <div class="header-text text-start position-absolute top-50 start-0 translate-middle-y ms-4 fs-4">
+            Dashboard
+        </div>
+        <div class="logo text-center">
+            <img src="/../assets/Logo.svg" alt="Logo" style="width: 50px; height: auto; margin-top: 4vh;" />
+        </div>
+    </div>
+</div>
+<main>
+    <div class="fluid">
+        <div class="row">
+            <div class="col-sm p-3 min-vh-100 " style="background-color: #F3F5F7;">
+                <div class="row row-cols-1 row-cols-md-5 g-3">
+                    <div class="col">
+                        <div class="card h-60 card-border">
+                            <div class="card-body d-flex flex-column justify-content-end">
+                                <p class="card-text small mb-0">Total Projects</p>
+                                <p class="card-text display-4 mt-auto mb-0">{{ totalProjects }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-60 card-border">
+                            <div class="card-body d-flex flex-column justify-content-end">
+                                <p class="card-text small mb-0">closed</p>
+                                <p class="card-text display-4 mt-auto mb-0">{{ closedProjectsCount }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-60 card-border">
+                            <div class="card-body d-flex flex-column justify-content-end">
+                                <p class="card-text small mb-0">Running</p>
+                                <p class="card-text display-4 mt-auto mb-0">{{ runningProjectsCount }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-60 card-border">
+                            <div class="card-body d-flex flex-column justify-content-end">
+                                <p class="card-text small mb-0">Closure Delay</p>
+                                <p class="card-text display-4 mt-auto mb-0">{{ proWithEndDateBefore }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-60 card-border">
+                            <div class="card-body d-flex flex-column justify-content-end">
+                                <p class="card-text small mb-0">Cancelled</p>
+                                <p class="card-text display-4 mt-auto mb-0">{{ cancelledProjectsCount }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="mt-3 fw-bolder">
+                        Department-wise Total vs Closed
+                    </div>
+                    <div class="card mt-3 chart-card">
+                        <div class="chart-container p-2">
+                            <canvas id="MyChart" width="500" height="400">{{ chart }}</canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,23 @@
+.icon-list{
+    margin-left: 1vw;
+     position: absolute;
+     top: 50%;
+     transform: translateY(-50%);
+   }
+
+   .logout{
+    margin-left: 1vw;
+    position: relative;
+   margin-top: 90vh;
+   }
+
+  .h-line {
+    float: left;
+    margin-top: 5px;
+    box-sizing: border-box;
+    height: 1px;
+    width: 30px;
+    border: 1px solid #979797;
+    opacity: 0.40;
+}
+

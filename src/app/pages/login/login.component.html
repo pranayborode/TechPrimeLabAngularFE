@@ -1,0 +1,59 @@
+<div>
+    <div class="row">
+        <div class="col-md-12 bg-image">
+            <div class="form-container">
+                <div class="container">
+                    <div class="sign_up">
+                        <div class="logo-img text-center">
+                            <img src="/../assets/Logo.svg" alt="Logo">
+                        </div>
+                        <div class="small-text text-center" style="color: beige; font-size: large;" >
+                            <p>Online Project Mangement</p>
+                        </div>
+                        <div class="container formSignup">
+                            <div class="row justify-content-center">
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">Login to get started</h5>
+                                            <form action="#" [formGroup]="loginForm" >
+                                                <div class="form-group">
+                                                    <label for="email">Email</label>
+                                                    <input type="email" class="form-control" id="email" placeholder="Enter your email" formControlName="email">
+                                                    <div *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].touched || loginForm.controls['email'].dirty || isFormSubmitted )">
+                                                        <span class="text-danger vMsg" *ngIf="loginForm.controls['email'].errors?.['required']">This is Required</span>
+                                                        <span class="text-danger vMsg" *ngIf="loginForm.controls['email'].errors?.['email']">email is not proper</span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="password">Password</label>
+                                                    <input type="password" class="form-control" id="password" placeholder="Enter your password" formControlName="password">
+                                                    <div *ngIf="loginForm.controls['password'].invalid && ( isFormSubmitted || loginForm.controls['password'].touched || loginForm.controls['password'].dirty)  ">
+                                                        <span class="text-danger vMsg" *ngIf="loginForm.controls['password'].errors?.['incorrectPassword'] && isFormSubmitted">Incorrect password.</span>
+                                                        <span class="text-danger vMsg" *ngIf="loginForm.controls['password'].errors?.['required']">This is Required</span>
+                                                       </div>
+                                                </div>
+
+                                                <small class="form-text text-muted text-right"><a href="#">Forgot Password?</a></small>
+                                                
+                                                <div class="text-center mt-2">
+                                                    <button type="submit" class="btn" style="background-color:#035FB2; color: white;"  (click)="onSubmit()">Login</button>&nbsp;
+                                                    <!-- <button type="submit" class="btn" style="background-color: #389AF3;color: white;" [routerLink]="['/signup']">Register</button>  [disabled]="!isFormSubmitted" -->
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 bg-color">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="container fluid g-0">
+    <div class="icon-list sidenav">
+        <ul
+            class="nav nav-pills navbar nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
+            <li>
+                <a [routerLink]="['/dashboard']" class="nav-link py-3 px-2"  title="" data-bs-toggle="tooltip"
+                    data-bs-placement="right" data-bs-original-title="Dashboard" (click)="toggleIcon('dashboardIcon')">
+                    <img id="dashboardIcon"
+                        [src]="selectedIcon === 'dashboardIcon' ? '/../assets/Dashboard-active.svg': '/../assets/Dashboard.svg'"
+                        alt="Dashboard" class="icon fs-1">
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['/projectlist']" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip"
+                    data-bs-placement="right" data-bs-original-title="Orders" (click)="toggleIcon('ordersIcon')">
+                    <img id="ordersIcon"
+                        [src]="selectedIcon === 'ordersIcon' ? '/../assets/Project-list-active.svg' : '/../assets/Project-list.svg'"
+                        alt="ProjectList" class="icon fs-1">
+                </a>
+            </li>
+            <div class="h-line"></div>
+            <li>
+                <a [routerLink]="['/createproject']" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip"
+                    data-bs-placement="right" data-bs-original-title="Products" (click)="toggleIcon('productsIcon')">
+                    <img id="productsIcon"
+                        [src]="selectedIcon === 'productsIcon' ? '/../assets/create-project-active.svg' : '/../assets/create-project.svg'"
+                        alt="CreateProject" class="icon fs-1">
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="logout">
+        <a class="logout-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right"
+            data-bs-original-title="Orders">
+            <img (click)="confirmLogout()"  id="ordersIcon" src="/../assets/Logout.svg" alt="Logout" class="icon fs-1">
+        </a>
+    </div>
+</div>

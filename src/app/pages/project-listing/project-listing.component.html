@@ -1,0 +1,124 @@
+<app-sidenav />
+<div>
+  <div class="col bg-image position-relative">
+    <div class="header-text text-start position-absolute top-50 start-0 translate-middle-y ms-4 fs-4">
+        &lt;Project Listing
+    </div>
+    <div class="logo text-center">
+        <img src="/../assets/Logo.svg" alt="Logo" style="width: 50px; height: auto; margin-top: 6vh;" />
+    </div>
+</div>
+</div>
+<main>
+  <div class="fluid">
+    <div class="col-sm p-3 min-vh-100" style="background-color: #F3F5F7;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div class="search-container d-flex align-items-center">
+                    <i class="bi bi-search search-icon text-muted me-2"></i>
+                    <input type="text" class="search-input" placeholder="Search" [(ngModel)]="searchTerm"
+                      (input)="filterProjects()">
+                  </div>
+                  <div class="SortbyDropdown">
+                    <label for="sortColumn text-muted">Sort By : </label>
+                    <select id="sortColumn" [(ngModel)]="selectedSortColumn" (change)="applySort()"
+                      class="custom-dropdown  no-border">
+                      <option value="">Select Column</option>
+                      <option value="projectName"> Project Name</option>
+                      <option value="reason"> Reason</option>
+                      <option value="types"> Type</option>
+                      <option value="division"> Division</option>
+                      <option value="category"> Category</option>
+                      <option value="priority"> Priority</option>
+                      <option value="department"> Department</option>
+                      <option value="location"> Location</option>
+                      <option value="status"> Status</option>
+                      <option value="startDate"> Start Date</option>
+                      <option value="endDate"> End Date</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="table-responsive">
+                  <table class="table table-hover table-sm">
+                    <thead class="table-info">
+                      <tr>
+                        <th>Project Name</th>
+                        <th>Reason</th>
+                        <th>Type</th>
+                        <th>Division</th>
+                        <th>Category</th>
+                        <th>Priority</th>
+                        <th>Department</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let project of filteredProjects">
+                        <td>
+                          <div>{{ project.projectName }}</div>
+                          <div class="small text-muted">{{ project.startDate | date: 'dd-MM-yyyy' }} - {{
+                            project.endDate | date: 'dd-MM-yyyy' }}</div>
+                        </td>
+                        <td>{{ project.reasonName}}</td>
+                        <td>{{ project.typeName}}</td>
+                        <td>{{ project.divisionName}}</td>
+                        <td>{{ project.categoryName}}</td>
+                        <td>{{ project.priorityName}}</td>
+                        <td>{{ project.departmentName}}</td>
+                        <td>{{ project.locationName}}</td>
+                        <td>{{ project.statusName}}</td>
+                        <td>
+                          <div class="d-flex">
+                            <button class="btn btn-sm btn-outline-primary rounded-pill mx-1 w-auto" [ngStyle]="{'background-color':
+                                      project.statusId == 2  ? '#3B71CA' : 'none', color:
+                                      project.statusId == 2 ? '#ffffff' : 'inherit' }"
+                              (click)="startProject(project)">Start</button>
+
+                            <button class="btn btn-sm btn-outline-primary rounded-pill mx-1 w-auto" [ngStyle]="{'background-color':
+                                      project.statusId == 3  ? '#3B71CA' : 'none', color:
+                                      project.statusId == 3 ? '#ffffff' : 'inherit' }"
+                              (click)="closeProject(project)">Close</button>
+
+                            <button class="btn btn-sm btn-outline-primary rounded-pill mx-1 w-auto" [ngStyle]="{'background-color':
+                                      project.statusId == 4  ? '#3B71CA' : 'none', color:
+                                      project.statusId == 4 ? '#ffffff' : 'inherit' }"
+                              (click)="cancelProject(project)">Cancel</button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="mt-3">
+              <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item" [class.disabled]="currentPage === 1">
+                    <a class="page-link" aria-label="Previous" (click)="onPageChange(currentPage - 1)">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item" *ngFor="let page of getPagesArray()" [class.active]="currentPage === page">
+                    <a class="page-link" (click)="onPageChange(page)">{{ page }}</a>
+                  </li>
+                  <li class="page-item" [class.disabled]="currentPage === totalPages">
+                    <a class="page-link" aria-label="Next" (click)="onPageChange(currentPage + 1)">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
