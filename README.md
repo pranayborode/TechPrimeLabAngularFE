@@ -2,6 +2,13 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.3.
 
+## Installation
+To run this project, you will need to install the following packages:<br><br>
+node_modules - npm install <br>
+Bootstrap    - npm install bootstrap<br>
+Chart        - npm install chart.js<br>
+PrimeNg      - npm install primeng
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
