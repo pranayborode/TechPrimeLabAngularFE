@@ -1,182 +1,241 @@
-<app-sidenav />
-<div>
-    <div class="col bg-image position-relative">
-        <div class="header-text text-start position-absolute top-50 start-0 translate-middle-y ms-4 fs-4">
-            &lt; Create Project
+<div class="main">
+    <div class="sidebar-parent">
+        <div class="sidebar-main">
+            <ul class="nav  navbar  flex-sm-column mb-auto  ">
+                <li>
+                    <a [routerLink]="['/dashboard']" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip"
+                        data-bs-placement="right" data-bs-original-title="Dashboard"
+                        (click)="toggleIcon('dashboardIcon')">
+                        <img id="dashboardIcon"
+                            [src]="selectedIcon === 'dashboardIcon' ? '/../assets/Dashboard-active.svg': '/../assets/Dashboard.svg'"
+                            alt="Dashboard" class="icon fs-1">
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/projectlist']" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip"
+                        data-bs-placement="right" data-bs-original-title="Orders" (click)="toggleIcon('ordersIcon')">
+                        <img id="ordersIcon"
+                            [src]="selectedIcon === 'ordersIcon' ? '/../assets/Project-list-active.svg' : '/../assets/Project-list.svg'"
+                            alt="ProjectList" class="icon fs-1">
+                    </a>
+                </li>
+                <div class="h-line"></div>
+                <li>
+                    <a [routerLink]="['/createproject']" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip"
+                        data-bs-placement="right" data-bs-original-title="Products"
+                        (click)="toggleIcon('productsIcon')">
+                        <img id="productsIcon"
+                            [src]="selectedIcon === 'productsIcon' ? '/../assets/create-project-active.svg' : '/../assets/create-project.svg'"
+                            alt="CreateProject" class="icon fs-1">
+                    </a>
+                </li>
+            </ul>
         </div>
-        <div class="logo text-center">
-            <img src="/../assets/Logo.svg" alt="Logo" style="width: 50px; height: auto; margin-top: 4vh;" />
+
+        <div class="logout">
+            <a class="logout-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right"
+                data-bs-original-title="Orders">
+                <img (click)="confirmLogout()" id="ordersIcon" src="/../assets/Logout.svg" alt="Logout"
+                    class="icon fs-1">
+            </a>
         </div>
     </div>
-</div>
-<main>
-    <div class="fluid">
-        <div class="row">
-            <div class="col-sm p-3 min-vh-100" style="background-color: #f3f5f7">
+    <div class="component-body">
+        <div class="col bg-image position-relative">
+            <div class="header-text text-start position-absolute top-50 start-0 translate-middle-y ms-4 fs-4">
+                <div class="header-title">&lt; Create Project</div>
+            </div>
+            <div class="logo text-center">
+                <img src="/../assets/Logo.svg" alt="Logo" />
+            </div>
+            <div class="header-logout header-text  position-absolute top-50 end-0 translate-middle-y me-4 fe-4">
+                <a class="logout-link" title="" data-bs-toggle="tooltip" data-bs-placement="right"
+                    data-bs-original-title="Orders">
+                    <img (click)="confirmLogout()" id="ordersIcon" src="/../assets/logoutHeader.svg" alt="Logout"
+                        class="icon fs-1 logout-icon">
+                </a>
+            </div>
+        </div>
+        <div class="fluid">
+            <div class="card-row">
                 <!-- form content -->
                 <div class="card">
                     <div class="card-body">
                         <form [formGroup]="projectForm">
-                            <div class="row mb-3">
-                                <div class="col-lg-8">
-                                    <label class="custom-label faint-text small-text" for="projectName"></label>
-                                    <input type="text" class="form-control custom-height" id="projectName"
-                                        formControlName="projectName" placeholder="Enter Project Theme">
-                                    <div
-                                        *ngIf="projectForm.controls['projectName'].invalid  &&(projectForm.controls['projectName'].touched || projectForm.controls['projectName'].dirty || projectForm.valid)">
-                                        <span class="text-danger vMsg"
-                                            *ngIf="projectForm.controls['projectName'].errors?.['required']">This fild
-                                            required</span>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 mt-4 d-flex justify-content-end">
-                                    <button class="btn btn-primary float-right rounded-pill" (click)="saveProject()" style="height:40px; width: 150;">
-                                        Save Project
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <label class="custom-label faint-text small-text" for="reason">Reason</label>
-                                    <select class="form-select" formControlName="reason">
-                                        <option *ngFor="let r of reasonList" [value]="r.reasonId">{{ r.reasonName }}
-                                        </option>
-                                    </select>
-                                    <div
-                                        *ngIf="projectForm.controls['reason'].invalid  &&(projectForm.controls['reason'].touched || projectForm.controls['reason'].dirty || projectForm.valid)">
-                                        <span class="text-danger vMsg"
-                                            *ngIf="projectForm.controls['reason'].errors?.['required']">This fild
-                                            required</span>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <label class="custom-label faint-text small-text" for="types">Type</label>
-                                    <select class="form-select" formControlName="types">
-                                        <option *ngFor="let types of typesList" [value]="types.typeId">
-                                            {{ types.typeName }}
-                                        </option>
-                                    </select>
-                                    <div
-                                        *ngIf="projectForm.controls['types'].invalid  &&(projectForm.controls['types'].touched || projectForm.controls['types'].dirty || projectForm.valid)">
-                                        <span class="text-danger vMsg"
-                                            *ngIf="projectForm.controls['types'].errors?.['required']">This fild
-                                            required</span>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <label class="custom-label faint-text small-text" for="status">Division</label>
-                                    <select class="form-select" formControlName="division">
-                                        <option *ngFor="let division of divList" [value]="division.divisionId">
-                                            {{ division.divisionName }}
-                                        </option>
-                                    </select>
-                                    <div
-                                        *ngIf="projectForm.controls['division'].invalid  &&(projectForm.controls['division'].touched || projectForm.controls['division'].dirty || projectForm.valid)">
-                                        <span class="text-danger vMsg"
-                                            *ngIf="projectForm.controls['division'].errors?.['required']">This fild
-                                            required</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <label class="custom-label faint-text small-text" for="status">Category</label>
-                                    <select class="form-select" formControlName="category">
-                                        <option *ngFor="let category of categoryList" [value]="category.categoryId">
-                                            {{ category.categoryName }}
-                                        </option>
-                                    </select>
-                                    <div
-                                        *ngIf="projectForm.controls['category'].invalid  &&(projectForm.controls['category'].touched || projectForm.controls['category'].dirty || projectForm.valid)">
-                                        <span class="text-danger vMsg"
-                                            *ngIf="projectForm.controls['category'].errors?.['required']">This fild
-                                            required</span>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <label class="custom-label faint-text small-text" for="status">Priority</label>
-                                    <select class="form-select" formControlName="priority">
-                                        <option *ngFor="let priority of priorityList" [value]="priority.priorityId">
-                                            {{ priority.priorityName }}
-                                        </option>
-                                    </select>
-                                    <div
-                                        *ngIf="projectForm.controls['priority'].invalid  &&(projectForm.controls['priority'].touched || projectForm.controls['priority'].dirty || projectForm.valid)">
-                                        <span class="text-danger vMsg"
-                                            *ngIf="projectForm.controls['priority'].errors?.['required']">This fild
-                                            required</span>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <label class="custom-label faint-text small-text" for="status">Department</label>
-                                    <select class="form-select" formControlName="department">
-                                        <option *ngFor="let department of departmentList"
-                                            [value]="department.departmentId">
-                                            {{ department.departmentName }}
-                                        </option>
-                                    </select>
-                                    <div
-                                        *ngIf="projectForm.controls['department'].invalid  &&(projectForm.controls['department'].touched || projectForm.controls['department'].dirty || projectForm.valid)">
-                                        <span class="text-danger vMsg"
-                                            *ngIf="projectForm.controls['department'].errors?.['required']">This fild
-                                            required</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <label class="custom-label faint-text small-text" for="startDate">Start Date as per
-                                        Project
-                                        Plan</label>
-                                    <input type="date" class="form-control" formControlName="startDate"
-                                        placeholder="Start Date">
-                                    <div
-                                        *ngIf="projectForm.controls['startDate'].invalid  &&(projectForm.controls['startDate'].touched || projectForm.controls['startDate'].dirty || projectForm.valid)">
-                                        <span class="text-danger vMsg"
-                                            *ngIf="projectForm.controls['startDate'].errors?.['required']">This fild
-                                            required</span>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <label class="custom-label faint-text small-text" for="endDate">End Date as per
-                                        Project
-                                        Plan</label>
-                                    <input type="date" class="form-control" formControlName="endDate"
-                                        placeholder="End Date" value="{{ endDate | date: 'yyyy-MM-dd' }}"
-                                        (blur)="compareTwoDates()">
-                                    <div
-                                        *ngIf="projectForm.controls['endDate'].invalid  &&(projectForm.controls['endDate'].touched || projectForm.controls['endDate'].dirty || projectForm.valid)">
-                                        <span class="text-danger vMsg"
-                                            *ngIf="projectForm.controls['endDate'].errors?.['required']">This fild
-                                            required</span>
-                                    </div>
-                                    <div *ngIf="error.isError" class="text-danger">
-                                        {{ error.errorMessage }}
-                                    </div>
-
-                                </div>
-                                <div class="col">
-                                    <label class="custom-label faint-text small-text" for="status">Location</label>
-                                    <select class="form-select" formControlName="location">
-                                        <option *ngFor="let location of locationList" [value]="location.locationId">
-                                            {{ location.locationName }}
-                                        </option>
-                                    </select>
-                                    <div
-                                        *ngIf="projectForm.controls['location'].invalid  &&(projectForm.controls['location'].touched || projectForm.controls['location'].dirty || projectForm.valid)">
-                                        <span class="text-danger vMsg"
-                                            *ngIf="projectForm.controls['location'].errors?.['required']">This fild
-                                            required</span>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <div class="form-control text-end" style="border: none">
-                                            Status : {{ status }}
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="row form-input mt-0">
+                                        <div class="col-lg-8">
+                                            <div class="col">
+                                                <label class="custom-label" for="projectName"></label>
+                                                <input type="text" class="form-control custom-height" id="projectName" formControlName="projectName"
+                                                    placeholder="Enter Project Theme">
+                                                <div
+                                                    *ngIf="projectForm.controls['projectName'].invalid  &&(projectForm.controls['projectName'].touched || projectForm.controls['projectName'].dirty || projectForm.valid)">
+                                                    <span class="text-danger vMsg" *ngIf="projectForm.controls['projectName'].errors?.['required']">This fild
+                                                        required</span>
+                                                </div>
+                                            </div>
                                         </div>
+                                        <div class="col-lg-4"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="col form-input">
+                                                <label class="custom-label" for="reason">Reason</label>
+                                                <select class="form-select" formControlName="reason">
+                                                    <option *ngFor="let r of reasonList" [value]="r.reasonId">{{ r.reasonName }}
+                                                    </option>
+                                                </select>
+                                                <div
+                                                    *ngIf="projectForm.controls['reason'].invalid  &&(projectForm.controls['reason'].touched || projectForm.controls['reason'].dirty || projectForm.valid)">
+                                                    <span class="text-danger vMsg" *ngIf="projectForm.controls['reason'].errors?.['required']">This fild
+                                                        required</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="col form-input">
+                                                <label class="custom-label" for="types">Type</label>
+                                                <select class="form-select" formControlName="types">
+                                                    <option *ngFor="let types of typesList" [value]="types.typeId">
+                                                        {{ types.typeName }}
+                                                    </option>
+                                                </select>
+                                                <div
+                                                    *ngIf="projectForm.controls['types'].invalid  &&(projectForm.controls['types'].touched || projectForm.controls['types'].dirty || projectForm.valid)">
+                                                    <span class="text-danger vMsg" *ngIf="projectForm.controls['types'].errors?.['required']">This fild
+                                                        required</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="col form-input">
+                                                <label class="custom-label " for="status">Division</label>
+                                                <select class="form-select" formControlName="division">
+                                                    <option *ngFor="let division of divList" [value]="division.divisionId">
+                                                        {{ division.divisionName }}
+                                                    </option>
+                                                </select>
+                                                <div
+                                                    *ngIf="projectForm.controls['division'].invalid  &&(projectForm.controls['division'].touched || projectForm.controls['division'].dirty || projectForm.valid)">
+                                                    <span class="text-danger vMsg" *ngIf="projectForm.controls['division'].errors?.['required']">This fild
+                                                        required</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="col form-input">
+                                                <label class="custom-label " for="status">Category</label>
+                                                <select class="form-select" formControlName="category">
+                                                    <option *ngFor="let category of categoryList" [value]="category.categoryId">
+                                                        {{ category.categoryName }}
+                                                    </option>
+                                                </select>
+                                                <div
+                                                    *ngIf="projectForm.controls['category'].invalid  &&(projectForm.controls['category'].touched || projectForm.controls['category'].dirty || projectForm.valid)">
+                                                    <span class="text-danger vMsg" *ngIf="projectForm.controls['category'].errors?.['required']">This fild
+                                                        required</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="col form-input">
+                                                <label class="custom-label " for="status">Priority</label>
+                                                <select class="form-select" formControlName="priority">
+                                                    <option *ngFor="let priority of priorityList" [value]="priority.priorityId">
+                                                        {{ priority.priorityName }}
+                                                    </option>
+                                                </select>
+                                                <div
+                                                    *ngIf="projectForm.controls['priority'].invalid  &&(projectForm.controls['priority'].touched || projectForm.controls['priority'].dirty || projectForm.valid)">
+                                                    <span class="text-danger vMsg" *ngIf="projectForm.controls['priority'].errors?.['required']">This fild
+                                                        required</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="col form-input">
+                                                <label class="custom-label " for="status">Department</label>
+                                                <select class="form-select" formControlName="department">
+                                                    <option *ngFor="let department of departmentList" [value]="department.departmentId">
+                                                        {{ department.departmentName }}
+                                                    </option>
+                                                </select>
+                                                <div
+                                                    *ngIf="projectForm.controls['department'].invalid  &&(projectForm.controls['department'].touched || projectForm.controls['department'].dirty || projectForm.valid)">
+                                                    <span class="text-danger vMsg" *ngIf="projectForm.controls['department'].errors?.['required']">This fild
+                                                        required</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="col form-input">
+                                                <label class="custom-label " for="startDate">Start Date as per
+                                                    Project
+                                                    Plan</label>
+                                                <input type="date" class="form-control" formControlName="startDate" placeholder="Start Date">
+                                                <div
+                                                    *ngIf="projectForm.controls['startDate'].invalid  &&(projectForm.controls['startDate'].touched || projectForm.controls['startDate'].dirty || projectForm.valid)">
+                                                    <span class="text-danger vMsg" *ngIf="projectForm.controls['startDate'].errors?.['required']">This fild
+                                                        required</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="col form-input">
+                                                <label class="custom-label " for="endDate">End Date as per
+                                                    Project
+                                                    Plan</label>
+                                                <input type="date" class="form-control" formControlName="endDate" placeholder="End Date"
+                                                    value="{{ endDate | date: 'yyyy-MM-dd' }}" (blur)="compareTwoDates()">
+                                                <div
+                                                    *ngIf="projectForm.controls['endDate'].invalid  &&(projectForm.controls['endDate'].touched || projectForm.controls['endDate'].dirty || projectForm.valid)">
+                                                    <span class="text-danger vMsg" *ngIf="projectForm.controls['endDate'].errors?.['required']">This fild
+                                                        required</span>
+                                                </div>
+                                                <div *ngIf="error.isError" class="text-danger">
+                                                    {{ error.errorMessage }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <label class="custom-label " for="status">Location</label>
+                                                    <select class="form-select" formControlName="location">
+                                                        <option *ngFor="let location of locationList" [value]="location.locationId">
+                                                            {{ location.locationName }}
+                                                        </option>
+                                                    </select>
+                                                    <div
+                                                        *ngIf="projectForm.controls['location'].invalid  &&(projectForm.controls['location'].touched || projectForm.controls['location'].dirty || projectForm.valid)">
+                                                        <span class="text-danger vMsg" *ngIf="projectForm.controls['location'].errors?.['required']">This fild
+                                                            required</span>
+                                                    </div>
+                                                </div>   
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <div class="form-floating">
+                                                        <div class="form-control text-start" style="border: none">
+                                                            Status : {{ status }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn btn-primary" (click)="saveProject()">
+                                            Save Project
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -186,4 +245,4 @@
             </div>
         </div>
     </div>
-</main>
+</div>

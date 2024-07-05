@@ -30,7 +30,6 @@ padding-bottom: 3vh;
 
 .logout{   
     margin-top: auto; 
-    margin-bottom: 2vh;
 }
 
 .h-line {
@@ -58,7 +57,7 @@ padding-bottom: 3vh;
    
 }
 .card-border{
-    border-left-color:#0CC9E8;
+    border-left-color:deepskyblue;
     border-left-width: 8px;
 }
 .card-text.display-4 {
@@ -116,24 +115,6 @@ margin-top: 4vh;
     margin-top: -4vh;
 }
 
-.chart-card {
-    display: inline-block; 
-    margin: auto;
-    padding: 0.5rem;
-
-}
-.chart-title{
-    margin-top: 2vh;
-    margin-bottom: 2vh;
-    font-size: 1.5vw;
-    font-weight: 600;
-  }
-  
-.chart-container {
-    width: 36vw; 
-    height: auto;
-}
-
 /* ------For Responcive mobile view - Start-----> */
 @media (max-width: 426px) {
     .sidebar-parent {
@@ -148,7 +129,6 @@ margin-top: 4vh;
         left: 0;
         background-color: #fff;
         border-radius: 35px 35px 0 0;
-        box-shadow: 0px -3px 8px #bcd2e1;
     }
 
     .sidebar-main {
@@ -236,33 +216,5 @@ margin-top: 4vh;
         border-left-color:deepskyblue;
         border-left-width: 2vw;
     }
-
-    .chart-card {
-        display: inline-block; 
-        margin: auto;
-        margin-top: 0;
-        padding: 0.5rem;
-    }
-    .chart-title{
-        margin-top: 1vh;
-        margin-bottom: 2vh;
-        font-size: 4vw;
-        font-weight: 600;
-
-      }
-    
-    .chart-container {
-        width: 85vw; 
-        height: auto;
-        margin-top: 1rem;
-    }
 }
-
-
-
-
-
-
-
-
 

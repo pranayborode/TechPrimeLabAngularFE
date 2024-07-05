@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Project } from '../../models/project';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { HttpHeaders } from '@angular/common/http';
@@ -25,7 +25,7 @@ export class ProjectListingComponent implements OnInit {
   selectedSortColumn: string = '';
   isSortAscending: boolean = true;
   currentPage: number = 1;
-  pageSize: number = 10;
+  pageSize: number = 7;
 
   constructor(private apiService: ApiService, private router: Router) { }
 
@@ -33,6 +33,12 @@ export class ProjectListingComponent implements OnInit {
   ngOnInit(): void {
     this.getAllProjects();
 
+    this.setInitialSelectedIcon(this.router.url);
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.setInitialSelectedIcon(event.urlAfterRedirects || '');
+      }
+    });
   }
 
 
@@ -154,9 +160,9 @@ export class ProjectListingComponent implements OnInit {
 
   // paginator
   onPageChange(pageNumber: number) {
-   
+
     this.currentPage = pageNumber;
-   
+
     this.updateFilteredProjects();
   }
 
@@ -191,7 +197,7 @@ export class ProjectListingComponent implements OnInit {
     }
   }
   toggleIcon(iconId: string): void {
-    this.selectedIcon = iconId; 
+    this.selectedIcon = iconId;
   }
 
 
@@ -209,6 +215,34 @@ export class ProjectListingComponent implements OnInit {
       default:
         this.selectedIcon = '';
         break;
+    }
+  }
+
+  confirmLogout(): void {
+    const confirmLogout = window.confirm('Are you sure you want to logout?');
+    if (confirmLogout) {
+      const token = localStorage.getItem('token');
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+
+      this.apiService.logout("User/Logout", { headers }).subscribe(
+        () => {
+          console.log("Logout successful");
+          localStorage.removeItem('token');
+
+          setTimeout(() => {
+            alert("Logout successful");
+          }, 1000);
+
+          this.router.navigate(['/login']);
+        },
+        (error) => {
+          this.router.navigate(['/login']);
+          // console.error("Logout failed", error);
+          // alert("Logout failed. Please try again.");
+        }
+      );
     }
   }
 

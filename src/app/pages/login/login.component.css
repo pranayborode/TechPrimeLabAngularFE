@@ -1,73 +1,186 @@
-
 .bg-image {
     background-image: url('/../assets/login-bg-1.svg');
     background-color: #F3F5F7;
     background-size: cover;
     background-position: bottom;
-    height: 50vh; 
+    height: 65vh;
+    width: 100vw;
 }
 
 .bg-color {
     background-color: #F3F5F7;
-    height: 50vh; 
+    height: 35vh;
+    width: 100vw;
 }
 
-
-.sign_up {
-    margin-top: 40px; 
+.login-logo {
+    margin-top: 10vh;
 }
 
 .logo-img img {
-    margin-top: 20px;
-    width: 75px; 
+    width: 6vw;
     height: auto;
-   
+
 }
 
-.small-text {
-    margin-bottom: 20px; 
+.titel-text p {
+    margin-bottom: 3vh;
+    margin-top: 3vh;
     color: white;
+    font-size: 1rem;
 }
 
-
-/* login form css */
-
-.container .formSignup {
-    margin-top: 30px;
-    
+.signin-form {
+    margin-top: 3vh;
 }
 
-.title {
-    font-size: 25px;
-    font-weight: 500;
+.card {
+    height: 55vh;
+    width: 30vw;
+}
+
+.card-body {
+    padding: 3vw;
+}
+
+.card-title {
+    font-size: 1.5vw;
     text-align: center;
-    margin-bottom: 20px;
 }
 
-.user_details {
-    margin-bottom: 20px;
+.signin-form-group {
+    margin-top: 6vh;
 }
 
-.input_box {
-    margin-bottom: 15px;
+.form-group-password {
+    margin-top: 5vh;
 }
 
-.details {
+.forgot-password {
     display: block;
-    font-weight: 500;
-    margin-bottom: 5px;
+    margin-top: 0.5vh;
+    text-align: right;
+    font-size: small;
 }
 
-.button {
+
+.submit-button button {
     text-align: center;
+    font-size: 14px;
+    margin-top: 2vh;
+    border-radius: 25vh;
+    width: 11vw;
+    height: 5vh;
 }
+
+
+
+
+@media (max-width: 426px) {
+    .bg-image {
+        background-image: url('/../assets/login-bg-1.svg');
+        background-color: #F3F5F7;
+        background-size: cover;
+        background-position: bottom;
+        height: 44vh;
+        width: 100vw;
+        border-radius: 0 0 0 65px;
+    }
+
+    .bg-color {
+        background-color: #FFF;
+        height: 56vh;
+        width: 100vw;
+       
+    }
+
+
+    .login-logo {
+        margin-top: 14vh;
+    }
+
+    .logo-img img {
+        width: 23vw;
+        height: auto;
+
+
+    }
+
+    .titel-text p {
+        margin-bottom: 3vh;
+        margin-top: 3vh;
+        color: white;
+        font-size: 1rem;
+    }
+
+    .row {
+        --bs-gutter-x: 0;
+    }
+
+    .signin-form {
+        margin-top: 16vh;
+        padding: 0;
+       
+    }
+
+    .card {
+        height: 50vh;
+        width: 90vw;
+        border: none;
+    }
+
+    .card-body {
+        padding: 2vw;
+        margin-left: 2vw;
+    }
+
+    .card-title {
+        font-size: 6vw;
+        text-align: left;
+    }
+
+    .signin-form-group {
+        margin-top: 3vh;
+    }
+
+    .form-group-password {
+        margin-top: 4vh;
+    }
+
+    .forgot-password {
+        display: block;
+        margin-top: 0.5vh;
+        text-align: right;
+        font-size: small;
+    }
+
+    input, button, select, optgroup, textarea {
+        height: 7vh;
+    }
+
+    .submit-button button {
+        text-align: center;
+        align-self: center;
+        font-size: 14px;
+        margin-bottom: 1vh;
+        border-radius: 25vh;
+        width: calc(100vw - 20vw);
+        height: 5vh;
+       
+    }
+
+    .custom-position{
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+}
+
 
 /* @media (max-width: 768px) {
     .container {
         padding: 0 15px;
     }
 } */
-
-
-
-

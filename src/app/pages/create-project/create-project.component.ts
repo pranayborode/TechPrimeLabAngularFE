@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ApiService } from '../../services/api.service';
 import { SidenavComponent } from '../sidenav/sidenav.component';
@@ -63,6 +63,12 @@ export class CreateProjectComponent implements OnInit{
     this.getDepartment();
     this.getLocation();
     
+    this.setInitialSelectedIcon(this.router.url);
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.setInitialSelectedIcon(event.urlAfterRedirects || '');
+      }
+    });
   }
 
   initializeForm(): void {
@@ -164,6 +170,7 @@ export class CreateProjectComponent implements OnInit{
     this.apiService.getRequest("Project/Location", { headers }).subscribe(data => {
       this.locationList = data;
     });
+
   }
 
 
@@ -248,7 +255,7 @@ export class CreateProjectComponent implements OnInit{
   }
 
   toggleIcon(iconId: string): void {
-    this.selectedIcon = iconId; 
+    this.selectedIcon = iconId;
   }
 
 
@@ -272,8 +279,27 @@ export class CreateProjectComponent implements OnInit{
   confirmLogout(): void {
     const confirmLogout = window.confirm('Are you sure you want to logout?');
     if (confirmLogout) {
-      this.router.navigate(['/login']);
+      const token = localStorage.getItem('token');
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+
+      this.apiService.logout("User/Logout", { headers }).subscribe(
+        () => {
+          console.log("Logout successful");
+          localStorage.removeItem('token');
+
+          setTimeout(() => {
+            alert("Logout successful");
+          }, 1000);
+
+          this.router.navigate(['/login']);
+        },
+        (error) => {
+          console.error("Logout failed", error);
+          alert("Logout failed. Please try again.");
+        }
+      );
     }
   }
-
 }
